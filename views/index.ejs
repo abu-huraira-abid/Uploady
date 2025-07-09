@@ -1,0 +1,37 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container-fluid my-3 mx-5 py-3">
+  <div class="container">
+    <div class="row d-flex align-items-center justify-content-center">
+      <% if (locals.data) { %>
+        <% locals.data.forEach(function(element) { %>
+          <div class="col-12 col-md-6 col-lg-4 my-2">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= element.title %></h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                  <%= element.category %>
+                </h6>
+                <p class="card-text my-3 mb-4" style="overflow-y: scroll;height: 15rem;text-align: justify;">
+                  <%= element.description %>
+                </p>
+                <div class="d-flex justify-content-around align-items-center">
+                    <form action="/editForm" method="post">
+                      <input type="text" name="index" hidden value="<%= element.index %>"id="">
+                      <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                    <form action="/deleteForm" method="post">
+                      <input type="text" name="index" hidden value="<%= element.index %>"id="">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
